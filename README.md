@@ -21,8 +21,16 @@
           env:
             MY_ENV_VAR1: ${{ secrets.MY_ENV_VAR1 }}
             MY_ENV_VAR2: ${{ secrets.MY_ENV_VAR2 }}  
-         
-`Note: app.yaml file should be in the root project directory`
+            
+You can also set the path to the app.yaml file
+    
+        - uses: actions/checkout@v1
+        - uses: ikuanyshbekov/app-yaml-env-compiler@v1.0
+          env:
+            MY_ENV_VAR1: ${{ secrets.MY_ENV_VAR1 }}
+            MY_ENV_VAR2: ${{ secrets.MY_ENV_VAR2 }}
+          args:
+            args: conf/dev_app.yaml
 
 
 Full example with deployment to Google App Engine:     

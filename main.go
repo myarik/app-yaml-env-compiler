@@ -13,8 +13,16 @@ import (
 
 func main() {
 	fmt.Println("Ready to compile ...")
-	
-	filename, _ := filepath.Abs("app.yaml")
+
+	var filename string
+	// Ability to set the
+	args := os.Args[1:]
+	if len(args) > 0 {
+		filename, _ = filepath.Abs(args[0])
+	} else {
+		filename, _ = filepath.Abs("app.yaml")
+	}
+
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -25,7 +33,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	fmt.Println(fmt.Sprintf("Env variables will be replaced: %v",mapResult["env_variables"]))
 
 	for k, any := range mapResult {
@@ -52,7 +60,7 @@ func main() {
 			}
 		}
 	}
-	
+
 	fmt.Println(fmt.Sprintf("Compiled env variables: %v",mapResult["env_variables"]))
 
 	out, err := yaml.Marshal(mapResult)
